@@ -1,2 +1,3 @@
 #!/bin/bash
-chmod 751 "$0"
+chmod 715 hello
+
