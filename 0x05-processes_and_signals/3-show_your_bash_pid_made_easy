@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
-# Displays PIDs for processes containing "bash"
+# Display bash-related PIDs in format: PID process_name
 # shellcheck disable=SC2009
 
-for pid in $(ls /proc | grep '^[0-9]\+$'); do
-    if [ -r "/proc/$pid/comm" ]; then
-        name=$(<"/proc/$pid/comm")
-        if echo "$name" | grep -iq "bash"; then
-            echo "$pid $name"
+for pid in /proc/[0-9]*; do
+    comm="$pid/comm"
+    if [ -r "$comm" ]; then
+        read -r name < "$comm"
+        if [[ "$name" =~ ^-?bash$ ]]; then
+            echo "${pid##*/} $name"
         fi
     fi
 done
+
