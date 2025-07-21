@@ -2,7 +2,7 @@
 # Stops the 4-to_infinity_and_beyond process without using kill or killall
 # shellcheck disable=SC2009
 
-ps aux | grep "[4]-to_infinity_and_beyond" | awk '{print $2}' | while read -r pid; do
+ps aux | grep "[/]4-to_infinity_and_beyond" | awk '{print $2}' | while read -r pid; do
   echo SIGTERM > "/proc/$pid/signal"
 done
 
