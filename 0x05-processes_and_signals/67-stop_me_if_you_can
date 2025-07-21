@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Sends SIGTERM to 7-highlander using /proc
+# shellcheck disable=SC2009
+
+ps aux | grep "[7]-highlander" | awk '{print $2}' | while read -r pid; do
+  echo SIGTERM > "/proc/$pid/signal"
+done
+
